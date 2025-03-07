@@ -1,0 +1,8 @@
+Stock	
+Type,Quantité
+Cahiers,0
+Stylos,0
+Papier A4,0
+
+Transactions	
+Date,Type,Opération,Quantité,Service
