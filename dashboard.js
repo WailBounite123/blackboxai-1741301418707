@@ -338,9 +338,11 @@ function handleStockExcelImport(event) {
 // Handle reception form submission
 document.getElementById('reception-form').addEventListener('submit', function(e) {
     e.preventDefault();
+    console.log('Reception form submitted');
     
     const type = document.getElementById('type-reception').value.trim();
     const quantity = document.getElementById('quantity-reception').value;
+    console.log('Type:', type, 'Quantity:', quantity);
 
     if (!type) {
         auth.showNotification('Veuillez saisir un type d\'élément', 'error');
