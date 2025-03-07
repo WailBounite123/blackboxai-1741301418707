@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortie des Éléments - Système d'Inventaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 font-[Poppins]">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-blue-600 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-3xl font-semibold">Système d'Inventaire</h1>
+                    <nav class="space-x-4">
+                        <a href="reception.html" class="px-4 py-2 hover:bg-blue-700 rounded-md">Réception</a>
+                        <a href="sortie.html" class="px-4 py-2 bg-blue-700 rounded-md">Sortie</a>
+                        <a href="historique.html" class="px-4 py-2 hover:bg-blue-700 rounded-md">Historique</a>
+                        <a href="stock.html" class="px-4 py-2 hover:bg-blue-700 rounded-md">Stock</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">
+                    <i class="fas fa-share-square mr-2"></i>Sortie des éléments
+                </h2>
+                <form id="sortie-form" class="space-y-4">
+                    <div>
+                        <label for="type-sortie" class="block text-sm font-medium text-gray-700">Type d'élément</label>
+                        <select id="type-sortie" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">Sélectionner un type</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="quantity-sortie" class="block text-sm font-medium text-gray-700">Quantité</label>
+                        <input type="number" id="quantity-sortie" required min="1"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="service" class="block text-sm font-medium text-gray-700">Service destinataire</label>
+                        <select id="service" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">Sélectionner un service</option>
+                            <option value="Service du secrétariat particulier">Service du secrétariat particulier</option>
+                            <option value="Service des affaires administratives">Service des affaires administratives</option>
+                            <option value="Service de l'état civil et de la rectification">Service de l'état civil et de la rectification</option>
+                            <option value="Service de la gestion financière et comptable">Service de la gestion financière et comptable</option>
+                            <option value="Service de l'urbanisme">Service de l'urbanisme</option>
+                            <option value="Service des travaux">Service des travaux</option>
+                            <option value="Service de l'animation locale">Service de l'animation locale</option>
+                            <option value="Service de gestion des moyens communs">Service de gestion des moyens communs</option>
+                            <option value="Service de l'environnement et de la protection">Service de l'environnement et de la protection</option>
+                            <option value="Service des affaires économiques et de la police administrative">Service des affaires économiques et de la police administrative</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        Enregistrer la sortie
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
