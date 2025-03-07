@@ -44,31 +44,41 @@ function authenticateUser(username, password) {
     return null;
 }
 
-// Handle login form submission
-document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    
-    // Check credentials
-    const user = authenticateUser(username, password);
-    
-    if (user) {
-        // Store user information in localStorage
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('isLoggedIn', 'true');
+// Cherche l'élément login-form
+const loginForm = document.getElementById('login-form');
+if (loginForm) {
+    // Si le formulaire existe, on attache l'événement submit
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        showNotification('Connexion réussie', 'success');
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
         
-        // Redirect to dashboard
-        setTimeout(() => {
+        // Check credentials
+        const user = authenticateUser(username, password);
+        
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            showNotification('Connexion réussie', 'success');
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1000);
+        } else {
+            showNotification('Nom d\'utilisateur ou mot de passe incorrect', 'error');
+        }
+    });
+
+    // Check if user is already logged in
+    window.addEventListener('DOMContentLoaded', function() {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
             window.location.href = 'dashboard.html';
-        }, 1000);
-    } else {
-        showNotification('Nom d\'utilisateur ou mot de passe incorrect', 'error');
-    }
-});
+        }
+    });
+}
+
 
 // Check if user is already logged in
 window.addEventListener('DOMContentLoaded', function() {
