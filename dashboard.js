@@ -1,6 +1,6 @@
 // Check if user is logged in, if not redirect to login page
 if (!localStorage.getItem('isLoggedIn')) {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 // Get current user
@@ -21,7 +21,7 @@ document.getElementById('logout-button').addEventListener('click', function() {
     localStorage.removeItem('user');
     auth.showNotification('Déconnexion réussie', 'success');
     setTimeout(() => {
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }, 1000);
 });
 
@@ -32,6 +32,12 @@ function updateInventory(type, quantity, isAddition = true, service = null) {
     // Initialize item type if it doesn't exist
     if (!inventory.items[type]) {
         inventory.items[type] = 0;
+    }
+
+    // Parse quantity as integer
+    quantity = parseInt(quantity);
+    if (isNaN(quantity) || quantity <= 0) {
+        throw new Error('La quantité doit être un nombre positif');
     }
 
     // Update quantity
@@ -65,7 +71,8 @@ function updateInventory(type, quantity, isAddition = true, service = null) {
     // Update displays
     updateStockDisplay();
     updateHistoryDisplay();
-    document.dispatchEvent(new Event('inventoryUpdated'));
+    updateTypeDropdown();
+    updateItemTypesList();
 }
 
 // Function to update type dropdown in sortie form
@@ -279,7 +286,7 @@ function downloadHistoryExcel() {
 // Function to handle stock Excel import
 function handleStockExcelImport(event) {
     // Only admin can import stock
-    if (!auth.hasPermission('view_all_stock')) {
+    if (!auth.hasPermission('import_stock')) {
         auth.showNotification('Vous n\'avez pas la permission d\'importer le stock', 'error');
         return;
     }
@@ -333,7 +340,12 @@ document.getElementById('reception-form').addEventListener('submit', function(e)
     e.preventDefault();
     
     const type = document.getElementById('type-reception').value.trim();
-    const quantity = parseInt(document.getElementById('quantity-reception').value);
+    const quantity = document.getElementById('quantity-reception').value;
+
+    if (!type) {
+        auth.showNotification('Veuillez saisir un type d\'élément', 'error');
+        return;
+    }
 
     try {
         updateInventory(type, quantity, true);
@@ -349,8 +361,13 @@ document.getElementById('sortie-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
     const type = document.getElementById('type-sortie').value.trim();
-    const quantity = parseInt(document.getElementById('quantity-sortie').value);
+    const quantity = document.getElementById('quantity-sortie').value;
     const service = document.getElementById('service').value.trim();
+
+    if (!type || !service) {
+        auth.showNotification('Veuillez remplir tous les champs', 'error');
+        return;
+    }
 
     try {
         updateInventory(type, quantity, false, service);
