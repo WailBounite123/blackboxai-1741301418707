@@ -89,6 +89,8 @@ function hasPermission(permission) {
             return user.role === 'admin';
         case 'add_items':
             return true; // All users can add items
+        case 'import_stock':
+            return user.role === 'admin';
         default:
             return false;
     }
@@ -114,18 +116,7 @@ function filterStockByUser(items) {
     if (user.role === 'admin') {
         return items;
     } else {
-        const userTransactions = JSON.parse(localStorage.getItem('inventory')).transactions
-            .filter(t => t.user === user.username)
-            .map(t => t.type);
-        
-        const uniqueItems = [...new Set(userTransactions)];
-        const filteredItems = {};
-        uniqueItems.forEach(itemType => {
-            if (items[itemType]) {
-                filteredItems[itemType] = items[itemType];
-            }
-        });
-        return filteredItems;
+        return items; // Allow all users to see all stock items
     }
 }
 
