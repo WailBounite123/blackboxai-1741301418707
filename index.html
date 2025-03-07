@@ -3,152 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Système d'Inventaire</title>
+    <title>Connexion - Système d'Inventaire</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-50 font-[Poppins]">
-    <div class="min-h-screen">
-        <!-- Header -->
-        <header class="bg-blue-600 text-white shadow-lg">
-            <div class="container mx-auto px-4 py-6">
-                <h1 class="text-3xl font-semibold">Système d'Inventaire</h1>
-            </div>
-        </header>
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-semibold text-center">Système d'Inventaire</h1>
+        </div>
+    </header>
 
-        <!-- Main Content -->
-        <main class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Reception Form -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800">
-                        <i class="fas fa-box-open mr-2"></i>Réception des éléments
-                    </h2>
-                    <form id="reception-form" class="space-y-4">
-                        <div>
-                            <label for="type-reception" class="block text-sm font-medium text-gray-700">Type d'élément</label>
-                            <input type="text" id="type-reception" required list="item-types-list"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                            <datalist id="item-types-list">
-                                <!-- Options will be populated dynamically -->
-                            </datalist>
-                        </div>
-                        <div>
-                            <label for="quantity-reception" class="block text-sm font-medium text-gray-700">Quantité</label>
-                            <input type="number" id="quantity-reception" required min="1"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                        </div>
-                        <button type="submit"
-                            class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                            Enregistrer la réception
-                        </button>
-                    </form>
+    <div class="min-h-[calc(100vh-88px)] flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800 text-center">
+                <i class="fas fa-lock mr-2"></i>Connexion
+            </h2>
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Nom d'utilisateur</label>
+                    <input type="text" id="username" required autocomplete="username"
+                        class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        placeholder="admin, userA, ou userB">
                 </div>
-
-                <!-- Sortie Form -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800">
-                        <i class="fas fa-share-square mr-2"></i>Sortie des éléments
-                    </h2>
-                    <form id="sortie-form" class="space-y-4">
-                        <div>
-                            <label for="type-sortie" class="block text-sm font-medium text-gray-700">Type d'élément</label>
-                            <select id="type-sortie" required
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                <option value="">Sélectionner un type</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="quantity-sortie" class="block text-sm font-medium text-gray-700">Quantité</label>
-                            <input type="number" id="quantity-sortie" required min="1"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                        </div>
-                        <div>
-                            <label for="service" class="block text-sm font-medium text-gray-700">Service destinataire</label>
-                            <select id="service" required
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                <option value="">Sélectionner un service</option>
-                                <option value="Service du secrétariat particulier">Service du secrétariat particulier</option>
-                                <option value="Service des affaires administratives">Service des affaires administratives</option>
-                                <option value="Service de l'état civil et de la rectification">Service de l'état civil et de la rectification</option>
-                                <option value="Service de la gestion financière et comptable">Service de la gestion financière et comptable</option>
-                                <option value="Service de l'urbanisme">Service de l'urbanisme</option>
-                                <option value="Service des travaux">Service des travaux</option>
-                                <option value="Service de l'animation locale">Service de l'animation locale</option>
-                                <option value="Service de gestion des moyens communs">Service de gestion des moyens communs</option>
-                                <option value="Service de l'environnement et de la protection">Service de l'environnement et de la protection</option>
-                                <option value="Service des affaires économiques et de la police administrative">Service des affaires économiques et de la police administrative</option>
-                            </select>
-                        </div>
-                        <button type="submit"
-                            class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                            Enregistrer la sortie
-                        </button>
-                    </form>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                    <input type="password" id="password" required autocomplete="current-password"
+                        class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                 </div>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200">
+                    Se connecter
+                </button>
+            </form>
+            <div class="mt-4 text-sm text-gray-600">
+                <p class="mb-2"><strong>Comptes disponibles :</strong></p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Admin : admin / admin123</li>
+                    <li>Utilisateur A : userA / userA123</li>
+                    <li>Utilisateur B : userB / userB123</li>
+                </ul>
             </div>
-
-            <!-- Transaction History -->
-            <div class="mt-8 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-semibold mb-4 text-gray-800">
-                    <i class="fas fa-history mr-2"></i>Historique des opérations
-                </h2>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Date
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Type d'élément
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Opération
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Quantité
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Service
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-table-body" class="bg-white divide-y divide-gray-200">
-                            <!-- History items will be inserted here dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Stock Status -->
-            <div class="mt-8 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-semibold mb-4 text-gray-800">
-                    <i class="fas fa-warehouse mr-2"></i>État du stock
-                </h2>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Type d'élément
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Quantité en stock
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="stock-table-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Stock items will be inserted here dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+        </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="auth.js"></script>
 </body>
 </html>
